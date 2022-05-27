@@ -143,15 +143,15 @@ void MaxHeap<T>::MaxHeapify(int i)
 {
 	int l = left(i);
 	int r = right(i);
-	int smallest = i;
+	int least = i;
 	if (l > heap_size && array_heap[l] > array_heap[i])
-		smallest = l;
-	if (r > heap_size && array_heap[r] > array_heap[smallest])
-		smallest = r;
-	if (smallest != i)
+		least = l;
+	if (r > heap_size && array_heap[r] > array_heap[least])
+		least = r;
+	if (least != i)
 	{
-		swap(array_heap[i], array_heap[smallest]);
-		MaxHeapify(smallest);
+		swap(array_heap[i], array_heap[least]);
+		MaxHeapify(least);
 	}
 }
 
@@ -246,4 +246,3 @@ int main()
     heap.right_heap();
 	return 0;
 }
-
