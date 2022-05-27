@@ -143,15 +143,15 @@ void MinHeap<T>::MinHeapify(int i)
 {
 	int l = left(i);
 	int r = right(i);
-	int smallest = i;
+	int least = i;
 	if (l < heap_size && array_heap[l] < array_heap[i])
-		smallest = l;
-	if (r < heap_size && array_heap[r] < array_heap[smallest])
-		smallest = r;
-	if (smallest != i)
+		least = l;
+	if (r < heap_size && array_heap[r] < array_heap[least])
+		least = r;
+	if (least != i)
 	{
-		swap(array_heap[i], array_heap[smallest]);
-		MinHeapify(smallest);
+		swap(array_heap[i], array_heap[least]);
+		MinHeapify(least);
 	}
 }
 
@@ -174,7 +174,7 @@ void swap(T &x, T &y)
 
 int main()
 {
-	MinHeap<std::string>heap(28);
+	MinHeap<int>heap(28);
 /*	heap.insert("C");
 	heap.insert("B");
 	heap.insert("E");
@@ -238,7 +238,7 @@ int main()
 	heap.insert(77);
 	heap.insert(11);
 	heap.print();
-    heap.extract_min_element();
+    heap.extract_max_element();
     std::cout<<"this is parent_heap " << heap.parent_heap()<<std::endl;
     std::cout <<"this is  height "<< heap.height()<<std::endl;
     heap.left_heap();
