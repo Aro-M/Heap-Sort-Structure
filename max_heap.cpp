@@ -117,7 +117,7 @@ public:
 
 	void insert(T value);
 	
-	void linear_search(T value_search);
+	int linear_search(T value_search);
 	
 	void print();
 };
@@ -210,27 +210,20 @@ T MaxHeap<T>::parent_heap(){
 
 
 template <typename T>
-void MaxHeap<T>::linear_search(T value_search){
+int MaxHeap<T>::linear_search(T value_search){
       for (int i = 0; i < MaxHeap::heap_size; i++) {
       if (MaxHeap::array_heap[i] == value_search) {
-        std::cout << "Value Found! " << array_heap[i] << " index of " << i  << std::endl;
-        return;
+        return i;
       }
     }
-    std::cout << "Value NOT Found!"<<std::endl;
+    return -1;
 }
 
 
 template <typename T>
 void MaxHeap<T>::extract_min_element(){
-    T max = array_heap[0];
-    for(int i = 0 ; i < MaxHeap::heap_size;i++){
-        if(max <  MaxHeap::array_heap[i]){
-            max =  MaxHeap::array_heap[i];
-           
-        }
-    }
-    std::cout<< "this is extract_min_element = " << max << std::endl;
+ 
+    std::cout<< "this is extract_min_element = " << array_heap[heap_size-1] << std::endl;
 }
 
 template <typename T>
@@ -244,11 +237,6 @@ MaxHeap<T>::MaxHeap(int cap)
 template <typename T>
 void MaxHeap<T>::insert(T value)
 {
-	if (heap_size == capacity)
-	{
-	std::cout << "Overflow: Could not insert "<<std::endl;
-		return;
-	}
     
 	heap_size++;
 	int i = heap_size - 1;
@@ -333,6 +321,9 @@ MaxHeap<int>hp= {2,4,8,44,8,77,2};
 	heap.insert(81);
     heap.insert(27);
 	heap.insert(8);
+	std::cout<<std::endl;
+	std::cout<<	heap.linear_search(81);
+
 	//MaxHeap<int> hs(20);
 	//hs = heap;
 //	std::cout << hs;
@@ -396,9 +387,9 @@ MaxHeap<int>hp= {2,4,8,44,8,77,2};
         heap.print();
 	heap.delete_element(3);
 	heap.insert(11);
-	heap.print();
+	heap.print();*/
     heap.extract_min_element();
-    std::cout<<"this is parent_heap " << heap.parent_heap()<<std::endl;
+   /* std::cout<<"this is parent_heap " << heap.parent_heap()<<std::endl;
     std::cout <<"this is  height "<< heap.height()<<std::endl;
     heap.left_heap();
     std::cout <<std::endl;
