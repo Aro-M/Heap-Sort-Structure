@@ -116,7 +116,7 @@ public:
 
 	void insert(T value);
 	
-	void linear_search(T value_search);
+	int linear_search(T value_search);
 	
 	void print();
 };
@@ -209,14 +209,14 @@ T MinHeap<T>::parent_heap(){
 
 
 template <typename T>
-void MinHeap<T>::linear_search(T value_search){
+int MinHeap<T>::linear_search(T value_search){
       for (int i = 0; i < MinHeap::heap_size; i++) {
       if (MinHeap::array_heap[i] == value_search) {
-        std::cout << "Value Found! " << array_heap[i] << " index of " << i  << std::endl;
-        return;
+      
+        return i;
       }
     }
-    std::cout << "Value NOT Found!"<<std::endl;
+    return -1;
 }
 
 
@@ -243,11 +243,7 @@ MinHeap<T>::MinHeap(int cap)
 template <typename T>
 void MinHeap<T>::insert(T value)
 {
-	if (heap_size == capacity)
-	{
-	std::cout << "Overflow: Could not insert "<<std::endl;
-		return;
-	}
+
     
 	heap_size++;
 	int i = heap_size - 1;
@@ -332,6 +328,7 @@ MinHeap<int>hp= {2,4,8,44,8,77,2};
 	heap.insert(81);
     heap.insert(27);
 	heap.insert(8);
+	std::cout<<heap.linear_search(8)<<std::endl;
 	//MinHeap<int> hs(20);
 	//hs = heap;
 //	std::cout << hs;
@@ -424,9 +421,9 @@ MinHeap<int>hp= {2,4,8,44,8,77,2};
 	heap.insert(81);
 	heap.insert(77);
 	heap.insert(11);
-	heap.print();
+	heap.print();*/
     heap.extract_max_element();
-    std::cout<<"this is parent_heap " << heap.parent_heap()<<std::endl;
+  /*  std::cout<<"this is parent_heap " << heap.parent_heap()<<std::endl;
     std::cout <<"this is  height "<< heap.height()<<std::endl;
     heap.left_heap();
     std::cout <<std::endl;
