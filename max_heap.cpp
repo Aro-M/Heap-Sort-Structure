@@ -222,8 +222,15 @@ int MaxHeap<T>::linear_search(T value_search){
 
 template <typename T>
 void MaxHeap<T>::extract_min_element(){
- 
-    std::cout<< "this is extract_min_element = " << array_heap[heap_size-1] << std::endl;
+ T min = array_heap[0];
+    for(int i = 0 ; i < MaxHeap::heap_size;i++){
+        if(min >  MaxHeap::array_heap[i]){
+            min =  MaxHeap::array_heap[i];
+           
+        }
+    }
+   
+    std::cout<< "this is extract_min_element = " <<min << std::endl;
 }
 
 template <typename T>
@@ -315,15 +322,15 @@ MaxHeap<int>hp= {2,4,8,44,8,77,2};
 	heap.insert(2);
 	heap.insert(66);
 	heap.insert(4);
-    heap.print();
+    
 	heap.insert(2);
 	heap.insert(6);
 	heap.insert(81);
     heap.insert(27);
 	heap.insert(8);
 	std::cout<<std::endl;
-	std::cout<<	heap.linear_search(81);
-
+	std::cout<<	heap.linear_search(2)<<std::endl;
+heap.print();
 	//MaxHeap<int> hs(20);
 	//hs = heap;
 //	std::cout << hs;
@@ -384,7 +391,7 @@ MaxHeap<int>hp= {2,4,8,44,8,77,2};
 	heap.delete_element(7);
 	heap.linear_search(4);
 //	heap.delete_element(24);
-        heap.print();
+    heap.print();
 	heap.delete_element(3);
 	heap.insert(11);
 	heap.print();*/
@@ -407,5 +414,3 @@ MaxHeap<int>hp= {2,4,8,44,8,77,2};
 	return 0;	
 
 }
-
-
