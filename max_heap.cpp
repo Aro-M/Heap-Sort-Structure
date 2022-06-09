@@ -22,44 +22,45 @@ public:
     ~MaxHeap();//destructor
  
   MaxHeap& operator=(const MaxHeap<T>& heap);///copy operator  
-  MaxHeap& operator=(const MaxHeap<T>&& heap); // move operator
+  MaxHeap& operator=( MaxHeap<T>&& heap); // move operator
 
-   bool operator==(MaxHeap<T> equal){
+   bool operator==(const MaxHeap<T> equal){
        if(vec_heap.size() != equal.vec_heap.size() ){
            return false;
        }
-       for(int i = 0;  i < (vec_heap.size()-1);++i){
+       for(int i = 0;  i < vec_heap.size();++i){
            if(vec_heap[i] != equal.vec_heap[i])
            return false;
        }
        return true;
    }///equal operator
    
-  bool operator!=(MaxHeap<T> no_equal){
-      if(vec_heap != no_equal.vec_heap){
-          return true;
-      }
-      for(int i = 0; i < (vec_heap.size()-1);++i){
-          if(vec_heap[i] != no_equal.vec_heap[i]){
-              return false;
-          }
-      }
-   return true;
+  bool operator!=(const MaxHeap<T> no_equal){
+     return !(*this == no_equal);
   }//noequal operator
 
   MaxHeap operator+=(MaxHeap<T>  &sumequal){
-      MaxHeap <T> temp;
+      
+      
       for(int i = 0; i < vec_heap.size();++i){
-      vec_heap[i] +=  sumequal.vec_heap[i];
+      this->vec_heap[i] +=  sumequal.vec_heap[i];
       }
-      return temp;
+      return *this;
   }; //sumequal operator
     
   MaxHeap operator+(MaxHeap<T>  &sum){
-      MaxHeap <T> tmp;
-      for(int i = 0; i < sum.size();++i){
-          tmp.vec_heap[i] = vec_heap[i] + sum.vec_heap[i];
+     MaxHeap <T> tmp;
+      if(sum.size() > vec_heap.size()){
+          for(int i = 0; i < sum.size();++i){
+          tmp.insert(vec_heap[i] + sum.vec_heap[i]);
+          }
       }
+          else{
+              for(int i = 0; i < vec_heap.size();++i){
+          tmp.insert(vec_heap[i] + sum.vec_heap[i]);
+          }
+     }
+      
       return tmp;
     };
    // sum operator
@@ -97,14 +98,11 @@ public:
 	void print();
 int linear_search(T value_search);
 	
-	
+	 
 };
 
 template <typename T>
-MaxHeap<T>::MaxHeap(){
-    
-    vec_heap = {};  //default
-}
+MaxHeap<T>::MaxHeap()=default;
 
 
 template <typename T>
@@ -123,48 +121,51 @@ MaxHeap<T>::MaxHeap(MaxHeap&& a){
 
 template <typename T>
 MaxHeap<T>&::MaxHeap<T>::operator=(const MaxHeap<T>& heap_copy){
+    if(this == &heap_copy){
+        return *this;
+    }
     vec_heap = heap_copy.vec_heap;
     
     return *this;
     //copy assignment
 }
  template <typename T>
-  MaxHeap<T>&::MaxHeap<T>::operator=(const MaxHeap<T>&& heap_move){
-      
+  MaxHeap<T>&::MaxHeap<T>::operator=( MaxHeap<T>&& heap_move){
+      if(this == &heap_move){
+        return *this;
+    }
       vec_heap = heap_move.vec_heap;
-   
+      heap_move.vec_heap = {};
       return *this;
   }; // move operator
 
 
 template <typename T>
 MaxHeap<T>::MaxHeap(std::initializer_list<T> obj){
-    for(auto it:obj){
-        insert(it);
-    }
+   /*vec_heap = obj;
+   MaxHeapify(vec_heap.size()-1);*/
+   for(auto it : obj)
+   insert(it);
     //initializer_list 
 }
 
 template <typename T>
-MaxHeap<T>::~MaxHeap(){
-    vec_heap = {};
-}
-
+MaxHeap<T>::~MaxHeap()=default;
 
 template <typename T>
 void MaxHeap<T>::extract_min_element(){
-    T max = vec_heap[0];
-    for(int i = 0; i < (MaxHeap::vec_heap.size()-1);++i){
-        if(max > MaxHeap::vec_heap[i]){
-            max = MaxHeap::vec_heap[i];
+    T min = vec_heap[0];
+    for(int i = 0; i < MaxHeap::vec_heap.size();++i){
+        if(min > MaxHeap::vec_heap[i]){
+            min = MaxHeap::vec_heap[i];
         }
     }
-    std::cout << "this is extract_min_element  = " << max << std::endl; 
+    std::cout << "this is extract_min_element  = " << min << std::endl; 
 }
 
 template <typename T>
 void MaxHeap<T>::delete_element(T value_delete){
-    for(int i =0; i < (MaxHeap::vec_heap.size()-1);++i){
+    for(int i =0; i < (MaxHeap::vec_heap.size());++i){
         if(MaxHeap::vec_heap[i] == value_delete ){
             swap(MaxHeap::vec_heap[i], vec_heap[MaxHeap::vec_heap.size()-1]);
             MaxHeap::vec_heap.pop_back();
@@ -195,7 +196,7 @@ T MaxHeap<T>::parent_heap(){
 template <typename  T>
 void MaxHeap<T>::right_heap(){
     
-    for(int i =0; i < ((MaxHeap::vec_heap.size()-1)/2);++i){
+    for(int i =0; i < (MaxHeap::vec_heap.size()/2);++i){
         std::cout << "right  is "<< vec_heap[(2*i)+2]<<std::endl;
     }
 }
@@ -236,8 +237,8 @@ void MaxHeap<T>::print(){
 template <typename T>
 void MaxHeap<T>::MaxHeapify(int index){
    
-	
-    if (index != 0 && vec_heap[index] > vec_heap[parent(index)]){
+
+    if (index != 0 && ((vec_heap[index]) > vec_heap[parent(index)])){
         swap(vec_heap[index], vec_heap[parent(index)]);  
         MaxHeapify(parent(index));               
     }
@@ -274,21 +275,44 @@ int main(){
     heap.insert(87);
     heap.insert(81);
     heap.insert(52);
-//    heap.print();
+    heap.insert(8);
+    heap.insert(44);
+    heap.insert(521);
+ // heap.print();
     MaxHeap<int>heap1;
-    heap1.insert(1);
+       
+
+     heap1.insert(15);
+    heap1.insert(85);
+    heap1.insert(5);
+    heap1.insert(45);
+    heap1.insert(17);
+    heap1.insert(87);
+    heap1.insert(81);
+    heap1.insert(52);
+    heap1.insert(8);
+    heap1.insert(43);
+    heap1.insert(521);
+  //  heap1.print();
+ //   heap.print();
+ MaxHeap<int>heap2;
+ heap2 = heap + heap1;
+  heap2.print();
+ //   heap2.print();
+   /* heap1.insert(1);
+   
     heap1.insert(7);
     heap1.insert(1);
     heap1.insert(5);
     heap1.insert(55);
     heap1.insert(14);
     heap1.insert(15);
-    heap1.insert(85);
+    heap1.insert(85);*/
    // heap1.print();
- //   heap1 += heap;
- //   heap1.print();
+ //heap1 += heap;
+  //heap1.print(); 
    // heap.print();
-    if(heap == heap1){
+/*   if(heap == heap1){
         std::cout << "equal "<<std::endl;
     }else{
         std::cout << "no equal "<<std::endl;
@@ -297,29 +321,49 @@ int main(){
     if(heap != heap1){
         std::cout << "true "<<std::endl;
     }else{
-        std::cout << "false " <<std::endl;
+        std::cout << "false" <<std::endl;
     }
-   // heap = heap + heap1;
+    */
+  //  MaxHeap<int>heap4;
+   //  MaxHeap<int>heap3;
+   
+   
+    heap.insert(11);
+    heap.insert(15);
+    heap.insert(17);
+    heap.insert(71);
+    heap.insert(19);
+    heap.insert(7);
+    heap.insert(11);
+    heap.insert(15);
+    heap.insert(17);
+    heap.insert(71);
+    heap.insert(19);
+    heap.insert(7);
+  
   // heap = heap + heap1;
-   // heap = std::move(heap1);
-   //  heap1 = heap;
-   // heap.print();
-    /*
-    heap.extract_min_element();
-    std::cout <<std::endl;
+ //   heap = std::move(heap1);
+ // heap.print();
+   //std::cout<< "asZDasZ"<<std::endl;
+    //heap1 = heap;
+    //heap1.insert(45);
+  // heap1.print();
+     
+  //  heap.extract_min_element();
+   /* std::cout <<std::endl;
     std::cout << heap.height()<<" ";
-    std::cout << std::endl;
-    heap.left_heap();
-    heap.right_heap();
+    std::cout << std::endl;*/
+  //  heap.left_heap();
+   /* heap.right_heap();
     std::cout << "linear_search is "<< heap.linear_search(95)<<std::endl;
     std::cout << "Parent is  " << heap.parent_heap() << std::endl;
     */
    // heap.print();
 
-   // heap.delete_element(125);
-  /*
+//   heap.delete_element(44);
   
-    heap.insert(105);
+ // heap.print();
+   /* heap.insert(105);
     heap.insert(35);
     heap.insert(175);
     heap.insert(34);*/
@@ -327,8 +371,8 @@ int main(){
  //heap.print();
    // std::cout <<heap; 
     std::cout<<std::endl;
-    MaxHeap<int>hp{32,7,5,1,78,81,18,7,225};
-    hp.print();
+   MaxHeap<int>hp{1,2,3,4,5,7,8,9};
+   hp.print();
+   
 }
-
 
