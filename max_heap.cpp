@@ -63,7 +63,7 @@ public:
       return *this;
   }; //sumequal operator
     
-  MaxHeap operator+(const MaxHeap<T>& sum){
+  MaxHeap operator+( MaxHeap<T>& sum){
      MaxHeap <T> tmp;
       if(sum.size() > vec_heap.size()){
           for(int i = 0; i < sum.vec_heap.size();++i){
