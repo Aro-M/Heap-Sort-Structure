@@ -39,28 +39,41 @@ public:
      return !(*this == no_equal);
   }//noequal operator
 
-  MinHeap operator+=(MinHeap<T>  &sumequal){
-      
-      
-      for(int i = 0; i < vec_heap.size();++i){
-      this->vec_heap[i] +=  sumequal.vec_heap[i];
-      }
+  MinHeap operator+=(const MinHeap<T>  &sumequal){
+      if(sumequal.vec_heap.size() < vec_heap.size())
+      for(int i = 0; i < sumequal.vec_heap.size();++i){
+      this->vec_heap[i] += sumequal.vec_heap[i];
+    
+        }
+        
+        
+        if(sumequal.vec_heap.size() > vec_heap.size()){
+        for(int i = 0; i < vec_heap.size();++i){
+     
+      this->vec_heap[i] += sumequal.vec_heap[i];
+        }
+       for(int i = vec_heap.size();i < sumequal.vec_heap.size();++i) {
+          
+            insert(sumequal.vec_heap[i]);
+        }
+        
+        }
+  
       return *this;
   }; //sumequal operator
     
-  MinHeap operator+(MinHeap<T>  &sum){
+  MinHeap operator+( MinHeap<T>  &sum){
      MinHeap <T> tmp;
       if(sum.size() > vec_heap.size()){
-          for(int i = 0; i < sum.size();++i){
-          tmp.insert(vec_heap[i] + sum.vec_heap[i]);
-          }
+          for(int i = 0; i < sum.vec_heap.size();++i){
+          tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
+         }
       }
-          else{
-              for(int i = 0; i < vec_heap.size();++i){
-          tmp.insert(vec_heap[i] + sum.vec_heap[i]);
-          }
+         else{
+               for(int i = 0; i < vec_heap.size();++i){
+          tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
+         }
      }
-      
       return tmp;
     };
    // sum operator
@@ -80,7 +93,7 @@ public:
 
 	int right(int parent) { return (2*parent + 2); }
 
-	void extract_max_element();
+	void extract_min_element();
 	
 	T parent_heap();
 	
@@ -151,14 +164,10 @@ template <typename T>
 MinHeap<T>::~MinHeap()=default;
 
 template <typename T>
-void MinHeap<T>::extract_max_element(){
-    T max = vec_heap[0];
-    for(int i = 0; i < MinHeap::vec_heap.size();++i){
-        if(max < MinHeap::vec_heap[i]){
-            max = MinHeap::vec_heap[i];
-        }
-    }
-    std::cout << "this is extract_max_element  = " << max << std::endl; 
+void MinHeap<T>::extract_min_element(){
+    T min = vec_heap[0];
+  
+    std::cout << "this is extract_min_element  = " << min << std::endl; 
 }
 
 template <typename T>
@@ -266,38 +275,29 @@ void swap(T &x , T &y){
 int main(){
     MinHeap<int>heap;
     heap.insert(15);
-    heap.insert(85);
     heap.insert(5);
-    heap.insert(45);
+    heap.insert(5);
+    heap.insert(41);
     heap.insert(17);
     heap.insert(87);
-    heap.insert(81);
-    heap.insert(52);
-    heap.insert(8);
-    heap.insert(44);
-    heap.insert(521);
-     heap.extract_max_element();
+   
+     heap.extract_min_element();
 
  // heap.print();
     MinHeap<int>heap1;
        
 
      heap1.insert(15);
-    heap1.insert(85);
-    heap1.insert(5);
-    heap1.insert(45);
-    heap1.insert(17);
-    heap1.insert(87);
-    heap1.insert(81);
-    heap1.insert(52);
     heap1.insert(8);
-    heap1.insert(43);
-    heap1.insert(521);
+    heap1.insert(5);
+    heap1.insert(5);
+    heap1.insert(7);
+
    
-  //  heap1.print();
- //   heap.print();
- MinHeap<int>heap2;
- heap2 = heap + heap1;
+   heap1.print();
+   heap.print();
+ MinHeap<int>heap2= heap + heap1;;
+ 
   heap2.print();
  //   heap2.print();
    /* heap1.insert(1);
@@ -310,10 +310,10 @@ int main(){
     heap1.insert(15);
     heap1.insert(85);*/
    // heap1.print();
- //heap1 += heap;
-  //heap1.print(); 
+// heap += heap1;
+  //heap.print(); 
    // heap.print();
-   if(heap == heap1){
+  /* if(heap == heap1){
         std::cout << "equal "<<std::endl;
     }else{
         std::cout << "no equal "<<std::endl;
@@ -323,24 +323,12 @@ int main(){
         std::cout << "true "<<std::endl;
     }else{
         std::cout << "false" <<std::endl;
-    }
+    }*/
     
   //  MinHeap<int>heap4;
    //  MinHeap<int>heap3;
    
    
-    heap.insert(11);
-    heap.insert(15);
-    heap.insert(17);
-    heap.insert(71);
-    heap.insert(19);
-    heap.insert(7);
-    heap.insert(11);
-    heap.insert(15);
-    heap.insert(17);
-    heap.insert(71);
-    heap.insert(19);
-    heap.insert(7);
   
   // heap = heap + heap1;
  //   heap = std::move(heap1);
@@ -372,7 +360,6 @@ int main(){
    // std::cout <<heap; 
     std::cout<<std::endl;
    MinHeap<int>hp{1,7,8,9,4,18,11,41};
-   hp.print();
+//   hp.print();
    
 }
-
