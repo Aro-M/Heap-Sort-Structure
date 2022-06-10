@@ -40,8 +40,7 @@ public:
   }//noequal operator
 
   MaxHeap operator+=(const MaxHeap<T>& sumequal){
-      
-      int t = 0;
+    
       if(sumequal.vec_heap.size() < vec_heap.size())
       for(int i = 0; i < sumequal.vec_heap.size();++i){
       this->vec_heap[i] += sumequal.vec_heap[i];
