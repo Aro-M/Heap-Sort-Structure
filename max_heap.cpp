@@ -186,8 +186,8 @@ MaxHeap<T>::~MaxHeap()=default;
 
 template <typename T>
 int MaxHeap<T>::extract_max_element(){
-    T max = vec_heap[0];
-     return max;
+   
+     return vec_heap[0];
 }
 
 template <typename T>
