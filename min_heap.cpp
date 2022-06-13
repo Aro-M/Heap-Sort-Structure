@@ -40,6 +40,14 @@ public:
   }//noequal operator
 
   MinHeap operator+=(const MinHeap<T>  &sumequal){
+     
+        if(sumequal.vec_heap.size() == vec_heap.size()){
+         for(int i = 0; i < vec_heap.size();++i){
+        this->vec_heap[i] += sumequal.vec_heap[i];
+         
+            }
+         }
+       
       if(sumequal.vec_heap.size() < vec_heap.size())
       for(int i = 0; i < sumequal.vec_heap.size();++i){
       this->vec_heap[i] += sumequal.vec_heap[i];
@@ -62,18 +70,28 @@ public:
       return *this;
   }; //sumequal operator
     
-  MinHeap operator+( MinHeap<T>  &sum){
+  MinHeap operator+(const MinHeap<T>  &sum){
      MinHeap <T> tmp;
-      if(sum.size() > vec_heap.size()){
+      if(sum.vec_heap.size() > vec_heap.size()){
           for(int i = 0; i < sum.vec_heap.size();++i){
           tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
          }
       }
-         else{
-               for(int i = 0; i < vec_heap.size();++i){
+         if(sum.vec_heap.size() < vec_heap.size()){
+               for(int i = 0; i < sum.vec_heap.size();++i){
           tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
+          
          }
-     }
+         
+          for(int i = sum.vec_heap.size();i < vec_heap.size();++i) {
+            tmp.vec_heap.push_back(vec_heap[i]);
+        }
+         }
+         if(sum.vec_heap.size() == vec_heap.size()){
+         for(int i = 0; i < vec_heap.size();++i){
+             tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
+            }
+         }
       return tmp;
     };
    // sum operator
@@ -93,7 +111,7 @@ public:
 
 	int right(int parent) { return (2*parent + 2); }
 
-	void extract_min_element();
+	int extract_min_element();
 	
 	T parent_heap();
 	
@@ -164,10 +182,10 @@ template <typename T>
 MinHeap<T>::~MinHeap()=default;
 
 template <typename T>
-void MinHeap<T>::extract_min_element(){
+int MinHeap<T>::extract_min_element(){
     T min = vec_heap[0];
   
-    std::cout << "this is extract_min_element  = " << min << std::endl; 
+  return min;
 }
 
 template <typename T>
@@ -279,7 +297,7 @@ int main(){
     heap.insert(5);
     heap.insert(41);
     heap.insert(17);
-    heap.insert(87);
+   
    
      heap.extract_min_element();
 
@@ -296,9 +314,11 @@ int main(){
    
    heap1.print();
    heap.print();
- MinHeap<int>heap2= heap + heap1;;
+// MinHeap<int>heap2= heap + heap1;;
  
-  heap2.print();
+  //heap2.print();
+  
+  //std::cout<<heap.extract_min_element();
  //   heap2.print();
    /* heap1.insert(1);
    
@@ -309,9 +329,9 @@ int main(){
     heap1.insert(14);
     heap1.insert(15);
     heap1.insert(85);*/
-   // heap1.print();
-// heap += heap1;
-  //heap.print(); 
+    //heap1.print();
+ heap1 += heap;
+  heap1.print(); 
    // heap.print();
   /* if(heap == heap1){
         std::cout << "equal "<<std::endl;
@@ -359,7 +379,7 @@ int main(){
  //heap.print();
    // std::cout <<heap; 
     std::cout<<std::endl;
-   MinHeap<int>hp{1,7,8,9,4,18,11,41};
+  // MinHeap<int>hp{1,7,8,9,4,18,11,41};
 //   hp.print();
    
 }
