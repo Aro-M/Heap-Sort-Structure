@@ -41,6 +41,14 @@ public:
 
   MaxHeap operator+=(const MaxHeap<T>& sumequal){
     
+     
+        if(sumequal.vec_heap.size() == vec_heap.size()){
+         for(int i = 0; i < vec_heap.size();++i){
+        this->vec_heap[i] += sumequal.vec_heap[i];
+          
+            }
+         }
+       
       if(sumequal.vec_heap.size() < vec_heap.size())
       for(int i = 0; i < sumequal.vec_heap.size();++i){
       this->vec_heap[i] += sumequal.vec_heap[i];
@@ -59,23 +67,33 @@ public:
         }
         
         }
+       
         
       return *this;
   }; //sumequal operator
     
-  MaxHeap operator+( MaxHeap<T>& sum){
+  MaxHeap operator+( const MaxHeap<T>& sum){
      MaxHeap <T> tmp;
-      if(sum.size() > vec_heap.size()){
+      if(sum.vec_heap.size() > vec_heap.size()){
           for(int i = 0; i < sum.vec_heap.size();++i){
           tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
          }
       }
-         else{
-               for(int i = 0; i < vec_heap.size();++i){
+         if(sum.vec_heap.size() < vec_heap.size()){
+               for(int i = 0; i < sum.vec_heap.size();++i){
           tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
+          
          }
+         
+          for(int i = sum.vec_heap.size();i < vec_heap.size();++i) {
+            tmp.vec_heap.push_back(vec_heap[i]);
+        }
          }
-      
+         if(sum.vec_heap.size() == vec_heap.size()){
+         for(int i = 0; i < vec_heap.size();++i){
+             tmp.vec_heap.push_back(vec_heap[i] + sum.vec_heap[i]);
+            }
+         }
            return tmp;
     };
    // sum operator
@@ -95,7 +113,7 @@ public:
 
 	int right(int parent) { return (2*parent + 2); }
 
-	void extract_max_element();
+	int extract_max_element();
 	
 	T parent_heap();
 	
@@ -167,9 +185,9 @@ template <typename T>
 MaxHeap<T>::~MaxHeap()=default;
 
 template <typename T>
-void MaxHeap<T>::extract_max_element(){
+int MaxHeap<T>::extract_max_element(){
     T max = vec_heap[0];
-    std::cout << "this is extract_max_element  = " << max << std::endl; 
+     return max;
 }
 
 template <typename T>
@@ -276,32 +294,36 @@ void swap(T &x , T &y){
 
 int main(){
     MaxHeap<int>heap;
-    heap.insert(1);
+    heap.insert(3);
     heap.insert(2);
     heap.insert(3);
     heap.insert(4);
     heap.insert(5);
     heap.insert(6);
     heap.insert(7);
-    heap.insert(8);
-    heap.insert(9);
- // heap.print();
+    heap.insert(1);
+   heap.insert(71);
+    heap.insert(11);
+  // heap.print();
     MaxHeap<int>heap1;
        
 
  
-    heap1.insert(1);
-    heap1.insert(2);
-    heap1.insert(3);
     heap1.insert(4);
-    heap1.insert(5);
-    heap1.insert(6);
+    heap1.insert(2);
+    heap1.insert(1);
+    heap1.insert(4);
+    heap1.insert(7);
+    heap1.insert(7);
+    heap1.insert(9);
+    heap1.insert(7);
+    
     heap1.print();
     heap.print();
    // heap1.print();
    // heap.print();
- //MaxHeap<int>heap2 = heap + heap1;
- //  heap2.print();
+ MaxHeap<int>heap2 = heap1 + heap;
+   heap2.print();
    /* heap1.insert(1);
    
     heap1.insert(7);
@@ -312,8 +334,8 @@ int main(){
     heap1.insert(15);
     heap1.insert(85);*/
    // heap1.print();
-heap1 += heap;
-  heap1.print(); 
+//heap1 += heap;
+  //heap1.print(); 
    // heap.print();
   /* if(heap == heap1){
         std::cout << "equal "<<std::endl;
@@ -338,7 +360,7 @@ heap1 += heap;
     //heap1.insert(45);
   // heap1.print();
     
-  //  heap.extract_max_element();
+  //std::cout<< heap.extract_max_element();
    /* std::cout <<std::endl;
     std::cout << heap.height()<<" ";
     std::cout << std::endl;*/
@@ -364,4 +386,3 @@ heap1 += heap;
   //  hp.print();
    
 }
-
