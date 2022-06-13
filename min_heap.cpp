@@ -183,9 +183,8 @@ MinHeap<T>::~MinHeap()=default;
 
 template <typename T>
 int MinHeap<T>::extract_min_element(){
-    T min = vec_heap[0];
   
-  return min;
+  return vec_heap[0];
 }
 
 template <typename T>
