@@ -48,18 +48,27 @@ And a few other helpful functions։
 I also made these constructors
 
 ---Default constructor:
+
 ---Constructor with parameters (+std::initializer_list)
+
 ---Copy constructor:
+
 ---Move constructor:
+
 ---Destructor:
 
 I also made these operators
 
 ---Copy operator assignment =
+
 ---Move operator assignment =
+
 ---Operator stream out (cout) <<
+
 ---Operator is equal to ==
+
 ---Operator not equal to !=
+
 ---Operator +, +=
 
 
