@@ -1,79 +1,103 @@
-# Heap-Sort-Structure 
+ <h1><b>Heap-Sort-Structure</b></h1> 
 
-Introduction to Heap in Data Structures
+<h2>Introduction to Heap in Data Structures</h2>
 
-A Heap is a special Tree-based data structure in which the tree is a complete binary tree. Generally, Heaps can be of two types:
+<strong>A Heap is a special Tree-based data structure in which the tree is a complete binary tree. Generally, Heaps can be of two types:</strong>
 
-Max-Heap: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. 
+<i>Max-Heap: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. </i>
 
-Min-Heap: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. 
+<i>Min-Heap: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. </i>
+
+<hr>
 
 
 ![2](https://user-images.githubusercontent.com/58858618/175516059-827fcb47-c64e-4da8-b7b8-7a4d3f46ee68.png)
 
-
-Time complexity in big O notation
-
-Algorithm		                 Average	     Worst case
-
-Insert		                    O(log n)      O(log n)
-
-Delete		                    O(log n)      O(log n)
+<hr>
 
 
-The elements in the data structure are T type (template).
+<b><i>Time complexity in big O notation</i> </b>
+<table>
+  <tr>
+    <th>Algorithm</th>
+    <th>Average</th>
+    <th>Worst case</th>
+  </tr>
+  <tr>
+    <td>Insert</td>
+    <td>O(log n)</td>
+    <td>O(log n)</td>
+  </tr>
+  <tr>
+    <td>Delete</td>
+    <td>O(log n)</td>
+    <td>O(log n)</td>
+  </tr>
+</table>
 
-I have performed these functions։
-insert () --- This function enters my values
+<hr>
+
+<b><i>The elements in the data structure are T type (template).</i> </b>
+
+<h3>I have performed these functions։</h3>
+
+<b>insert ()  </b> --- This function enters my values
  
-height () --- This function shows the height of my heap
+<b>height ()  </b>--- This function shows the height of my heap
 
-parent () --- This function shows the value of my parent
+<b>parent ()  </b>--- This function shows the value of my parent
 
-max_heapify () --- This function sorts Max Heap and Min Heap
+<b>max_heapify ()  </b>--- This function sorts Max Heap and Min Heap
 
-delete_element ()  --- I pass a value to this function, if it finds a value, remove it and sort again, if it doesn't find the same value, it returns
+<b>delete_element () </b> --- I pass a value to this function, if it finds a value, remove it and sort again, if it doesn't find the same value, it returns
 
-extract_max_element () --- Returns the largest value in the case of Max heap and returns the significant value in the case of Min heap
+ 
+<b>extract_max_element ()  </b> --- Returns the largest value in the case of Max heap and returns the significant value in the case of Min heap
 
-left () --- Returns the left child nodes
+<b>left ()  </b>--- Returns the left child nodes
 
-right () --- Returns the left child nodes
+<b>right ()  </b> --- Returns the left child nodes
 
-linear_search () --- Passes the meaning of this function, if it finds the meaning, returns the index, if it does not return, returns -1
+<b>linear_search ()  </b> --- Passes the meaning of this function, if it finds the meaning, returns the index, if it does not return, returns -1
 
-void print()  --- Prints Max Heap or Min Heap։
+<b>void print()  </b> --- Prints Max Heap or Min Heap։
 
 Same functions for min_heap
 
 And a few other helpful functions։
 
 
-I also made these constructors
-
----Default constructor:
-
----Constructor with parameters (+std::initializer_list)
-
----Copy constructor:
-
----Move constructor:
-
----Destructor:
-
-I also made these operators
-
----Copy operator assignment =
-
----Move operator assignment =
-
----Operator stream out (cout) <<
-
----Operator is equal to ==
-
----Operator not equal to !=
-
----Operator +, +=
+<hr>
 
 
+<h3>I also made these constructors</h3>
 
+<b>---Default constructor:  </b>
+
+<b>---Constructor with parameters (+std::initializer_list)  </b>
+
+<b>---Copy constructor:  </b>
+
+<b>---Move constructor:  </b>
+
+<b>---Destructor:  </b>
+
+<hr>
+
+
+<h3>I also made these operators</h3>
+
+<b>---Copy operator assignment =  </b>
+
+<b>---Move operator assignment =  </b>
+
+<b>---Operator stream out (cout) <<  </b>
+
+-<b>--Operator is equal to ==  </b>
+
+<b>---Operator not equal to !=  </b>
+
+ <b>---Operator +, +=  </b>
+
+
+<hr>
