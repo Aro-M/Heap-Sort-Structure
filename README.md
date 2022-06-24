@@ -4,9 +4,9 @@ Introduction to Heap in Data Structures
 
 A Heap is a special Tree-based data structure in which the tree is a complete binary tree. Generally, Heaps can be of two types:
 
-Max-Heap: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
+Max-Heap: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. 
 
-Min-Heap: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
+Min-Heap: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. 
 
 
 ![2](https://user-images.githubusercontent.com/58858618/175516059-827fcb47-c64e-4da8-b7b8-7a4d3f46ee68.png)
