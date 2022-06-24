@@ -14,11 +14,11 @@ Min-Heap: In a Min-Heap the key present at the root node must be minimum among t
 
 Time complexity in big O notation
 
-Algorithm		 Average	     Worst case
+Algorithm		                 Average	     Worst case
 
-Insert		   O(log n)      O(log n)
+Insert		                    O(log n)      O(log n)
 
-Delete		   O(log n)      O(log n)
+Delete		                    O(log n)      O(log n)
 
 
 The elements in the data structure are T type (template).
